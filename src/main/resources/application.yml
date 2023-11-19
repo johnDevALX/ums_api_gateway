@@ -1,19 +1,8 @@
-server:
-  port: 9999
 spring:
   application:
-    name: "ums_gateway"
+    name: ums-gateway
   cloud:
-    loadbalancer:
-      ribbon:
-        enabled: false
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-      routes:
-        - id: ums_auth_service
-          uri: lb://UMS_AUTH_SERVICE
-          predicates:
-            - Path=/auth/**
+    config:
+      uri: http://localhost:9999
+  config:
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:9999}
